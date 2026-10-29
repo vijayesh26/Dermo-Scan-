@@ -1,40 +1,72 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
+
 echo =========================================================================
-echo  Pushing DermoScan to GitHub Repository:
-echo  https://github.com/vijayesh26/Dermo-Scan-.git
+echo       DERMOSCAN - 1-CLICK GITHUB REPOSITORY PUSHER
+echo       Target: https://github.com/vijayesh26/Dermo-Scan-.git
 echo =========================================================================
 echo.
 
 cd /d "%~dp0"
 
-REM Ensure git is available in PATH for this session
+REM Ensure Git and GitHub CLI are in PATH
 if exist "%LOCALAPPDATA%\Programs\MinGit\cmd\git.exe" (
     set "PATH=%LOCALAPPDATA%\Programs\MinGit\cmd;%PATH%"
 )
+if exist "%LOCALAPPDATA%\Programs\gh" (
+    set "PATH=%LOCALAPPDATA%\Programs\gh;%PATH%"
+)
 
+REM Check GitHub CLI authentication status
+gh auth status >nul 2>&1
+if %errorlevel% neq 0 (
+    echo [!] You are not currently logged in to GitHub.
+    echo.
+    echo A secure GitHub sign-in will now open in your browser...
+    echo (Press Enter on the prompts and approve in your web browser)
+    echo.
+    gh auth login -h github.com -p https -w
+    if %errorlevel% neq 0 (
+        echo.
+        echo Login was not completed. Please try again.
+        pause
+        exit /b 1
+    )
+    echo.
+    echo [✓] Successfully authenticated with GitHub!
+    echo.
+)
+
+REM Setup git credential helper using GitHub CLI
+gh auth setup-git
+
+REM Ensure remote and branch are configured
 git remote set-url origin https://github.com/vijayesh26/Dermo-Scan-.git
 git branch -M main
 
-echo Executing: git push -u origin main
-echo (If prompted, please authenticate with your GitHub account)
+echo.
+echo Pushing project to https://github.com/vijayesh26/Dermo-Scan-.git ...
 echo.
 
 git push -u origin main
 
 if %errorlevel% neq 0 (
     echo.
-    echo -------------------------------------------------------------------------
-    echo  Push encountered an authentication or conflict check.
-    echo  If your GitHub repo already has an existing README or license file on remote,
-    echo  you can push with force by running:
-    echo    git push -u origin main --force
-    echo -------------------------------------------------------------------------
-) else (
+    echo [!] Standard push was rejected (likely because the remote repo has an initial commit).
+    echo Attempting force push to overwrite with the full DermoScan project...
+    echo.
+    git push -u origin main --force
+)
+
+if %errorlevel% equ 0 (
     echo.
     echo =========================================================================
-    echo  SUCCESS: All files successfully pushed to GitHub!
+    echo  [SUCCESS] All project files are now LIVE on your GitHub repository!
+    echo  View it at: https://github.com/vijayesh26/Dermo-Scan-
     echo =========================================================================
+) else (
+    echo.
+    echo [X] Push failed. Please verify your internet connection or repository permissions.
 )
 
 echo.
