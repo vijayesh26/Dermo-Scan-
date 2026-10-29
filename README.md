@@ -6,6 +6,12 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38BDF8.svg?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![ICD-10](https://img.shields.io/badge/Clinical-ICD--10--CM_Harmonized-0F6FBF.svg?style=flat)](https://www.cdc.gov/nchs/icd/icd10cm.htm)
 
+[![Deploy](https://img.shields.io/badge/Live_Deployment-Vercel-000000.svg?style=flat&logo=vercel&logoColor=white)](https://dermo-scan-nesn.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717.svg?style=flat&logo=github&logoColor=white)](https://github.com/vijayesh26/Dermo-Scan-)
+
+* **Live Web Application**: [https://dermo-scan-nesn.vercel.app/](https://dermo-scan-nesn.vercel.app/)
+* **GitHub Repository**: [https://github.com/vijayesh26/Dermo-Scan-](https://github.com/vijayesh26/Dermo-Scan-)
+
 > **Clinical Governance Disclaimer**: DermoScan is an educational AI screening demonstration system designed for dermatologic pattern recognition and morphological triage. It is not an FDA/CE-cleared diagnostic device and does not substitute for evaluation by a licensed, board-certified dermatologist.
 
 ---
