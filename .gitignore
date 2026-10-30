@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Build and dependencies
 node_modules
 dist
 dist-ssr
@@ -30,3 +31,12 @@ dist-ssr
 # Environment variables
 .env
 .env.production
+.env.local
+
+# Academic & University Deliverables (Kept locally, excluded from Git repo)
+*.docx
+*.pptx
+*.pdf
+daily diary*
+DERMO_SCAN_*
+DERMOSCAN_*
